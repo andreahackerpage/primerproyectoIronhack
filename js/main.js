@@ -1,6 +1,8 @@
 var canvas = document.getElementById("canvas");
 var ctx = canvas.getContext("2d");
 
+alert("Ayuda a Río a poner la basura en su lugar, usa las teclas debajo de la imagen y los números de los botes")
+
 var myMusic;
 
 
@@ -8,8 +10,8 @@ var BANANA = "https://img00.deviantart.net/4ef5/i/2011/239/6/e/banana_peel_by_kn
 var ATUN = "https://image.flaticon.com/icons/png/512/385/385149.png";
 var LECHE = "http://i46.tinypic.com/if234j.jpg";
 var AGUACATE= "https://cdn130.picsart.com/234635553059212.png?r1024x1024";
-var TV="http://www.clker.com/cliparts/c/a/c/2/12316861951931359250rg1024_cartoon_tv.svg.hi.png";
-var FLORES="http://moziru.com/images/daisy-clipart-flower-bunch-7.png";
+var TV="https://openclipart.org/image/2400px/svg_to_png/215823/oldtv.png";
+var FLORES="https://i.imgur.com/L9u8T0U.jpg";
 
 var organica = "organica";
 var inorganica="inorganica";
@@ -57,10 +59,9 @@ var bins;
 var frames = 0;
 var errores= 0;
 
-//boton que haga shuffle pero no lo hace
+
 $("#button").on("click", function(){
   console.log ("callate")
- 
   myMusic.stop();
       
 }) 
@@ -92,8 +93,6 @@ function startGame(){
     fila1();
     fila2();
     console.log(arrRubish)
-  
-    
     interval = setInterval(updateGame,1000/60);
      myMusic = new sound ("/Users/andreamrios/Documents/ironHack/week3/day1/Rubishly/Five Little Monkeys Jumping On The Bed  Children Nursery Rhyme  Songs.mp3");
      myMusic.play();
@@ -126,8 +125,9 @@ function startGame(){
 
     if (win){
       ctx.fillStyle = "black";
-      ctx.font = "50px sarif";
-      ctx.fillText("¡Ganaste!", 450, 300)
+      ctx.font = "80px sarif";
+      ctx.fillText("¡Ganaste!", 450, 300);
+      ctx.drawImage("https://previews.123rf.com/images/iconicbestiary/iconicbestiary1603/iconicbestiary160300001/52903254-children-sports-team-wins-a-golden-cup-mixed-race-kids-happy-winning-celebration-flat-style-vector-i.jpg", 450, 300, 100, 200)
     }
 
   }
@@ -167,9 +167,7 @@ function startGame(){
       })
         
       }
-    
-      
-   
+
   });
   
   function botes(){
@@ -183,7 +181,7 @@ function startGame(){
 
   var images = {
     tod1:"https://yourguthealthcoach.com/wp-content/uploads/2016/12/KidsHealth_Illustration_New_02.png",
-    tod2:"http://i65.tinypic.com/2gy7nrs.jpg"
+    tod2:"../Images/toddler2.png"
   };
   
   
