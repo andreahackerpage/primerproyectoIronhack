@@ -1,3 +1,5 @@
+var overlay =new Image;
+overlay.src = "../shield.png"
 function Rubish(positionX,y,letter,src, type){
     this.x = positionX;
     this.y = y;
@@ -7,6 +9,7 @@ function Rubish(positionX,y,letter,src, type){
     this.height = 100;
     this.img = new Image();
     this.img.src = src;
+    this.overlay = false;
     this.img.onload = function(){
       this.draw();
     }.bind(this);
@@ -15,6 +18,10 @@ function Rubish(positionX,y,letter,src, type){
       ctx.font = "40px robot";
       ctx.fillStyle = "black";
       ctx.fillText(this.letter,this.x+50,this.y+120);
+    }
+    this.drawOverlay = function(){
+      ctx.drawImage(overlay,this.x-this.width*0.5,this.y-this.height*0.5,this.width*2,this.height*2);
+      console.log("dibuja")
     }
   }
   

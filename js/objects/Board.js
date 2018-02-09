@@ -24,7 +24,6 @@ function Board(){
     this.draw = function(){
       ctx.fillStyle = "rgba(255,255,255, 0.8)";
       ctx.fillRect( this.x,this.y, 700, 400);
-      ctx.t
     }
   }
 

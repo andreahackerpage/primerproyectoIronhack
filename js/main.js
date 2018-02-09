@@ -13,31 +13,32 @@ var FLORES="http://moziru.com/images/daisy-clipart-flower-bunch-7.png";
 var organica = "organica";
 var inorganica="inorganica";
 var reciclado="reciclado";
-
+var overlayActive = false;
+var win = false;
 var basuraLinks = [
   {
     img : BANANA,
-    type: organica
+    type: 1
   },
   {
     img: ATUN,
-    type: reciclado
+    type: 3
   },
   {
     img: LECHE,
-    type: reciclado
+    type: 3
   },
   {
     img : AGUACATE,
-    type: organica
+    type: 1
   },
   {
     img : TV,
-    type: inorganica
+    type: 2
   },
   {
     img : FLORES,
-    type: organica
+    type: 1
   },
 ];
 
@@ -91,9 +92,19 @@ function startGame(){
     
     arrRubish.forEach(function(rubish){
       rubish.draw();
+      if (rubish.overlay){
+        rubish.drawOverlay();
+      }
     });
 
     title.draw();
+
+    if (win){
+      ctx.fillStyle = "black";
+      ctx.font = "50px sarif";
+      ctx.fillText("¡Ganaste!", 450, 300)
+    }
+  
 
   }
 
@@ -106,50 +117,34 @@ function startGame(){
     70:"F"
   }
   
-    bin1.number=1 == arrSolution[1]
-    bin2.number=2 == arrSolution[1]
-    bin3.number=3 == arrSolution[1]
-  
   //listeners
-
-  addEventListener("keydown"), function(e){
-    switch(e.keyCode){
-      case 65:
-          if(basuraLinks.type===bin1){
-          console.log("acierto");
-          }else{
-            console.log("error")
-          }
-          break;
-      case 66:
-          code block
-          break;
-      case 67:
-          code block
-          break;
-      case 68:
-          code block
-          break;
-      case 69:
-          code block
-          break;
-      case 70:
-          code block
-          break;
-      default:
-          code block
-  }
-
-  }
   addEventListener("keydown", function(e){
     var res = String.fromCharCode(e.keyCode);
-    console.log(arrSolution)
-    if(arrSolution.length==2){
-      botes();
-      console.log("no puedes rellenar mas");
-    }else{
-      arrSolution.push(res)
-    }
+    console.log(res)
+    if (overlayActive===false){
+      for (var i =0; i<arrRubish.length;i++){
+        if (res===arrRubish[i].letter){
+          arrRubish[i].overlay=true;
+          overlayActive=true;
+        }
+      }
+    } else {
+      arrRubish.forEach(function(rubish, index){
+        if (true===rubish.overlay){
+          rubish.overlay=false;
+          overlayActive=false;
+          if (res==rubish.type){
+            arrRubish.splice(index, 1);
+            if (arrRubish.length===0){
+              win = true;
+            }
+          }
+        }
+      })
+        
+      }
+    
+      
    
   });
   
