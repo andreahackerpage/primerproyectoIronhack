@@ -1,6 +1,7 @@
 var canvas = document.getElementById("canvas");
 var ctx = canvas.getContext("2d");
 
+var myMusic;
 
 
 var BANANA = "https://img00.deviantart.net/4ef5/i/2011/239/6/e/banana_peel_by_kna-d481n3u.png";
@@ -58,25 +59,47 @@ var errores= 0;
 
 //boton que haga shuffle pero no lo hace
 $("#button").on("click", function(){
-  startGame();
+  console.log ("callate")
+ 
+  myMusic.stop();
       
 }) 
+
+
+function sound(src){
+  this.sound=document.createElement("audio");
+  this.sound.src=src;
+  this.sound.setAttribute("preload","auto");
+  this.sound.setAttribute("controls", "none");
+  this.sound.style.display="none";
+  document.body.appendChild(this.sound);
+  this.play=function(){
+    this.sound.play();
+  }
+  this.stop=function(){
+    this.sound.pause();
+  }
+}
 
 function startGame(){
     //se debe resetear todo!!!! 
     frames = 0;
     board = new Board();
     board1= new BoardWhite();
-    player1 = new Player();
-    bin1= new Bin(180, "Orgánica",1);
-    bin2= new Bin (320, "Inorgánica",2);
-    bin3= new Bin (480, "Reciclado",3)
+    bin1= new Bin(180, "1 Orgánica",1);
+    bin2= new Bin (320, "2 Inorgánica",2);
+    bin3= new Bin (480, "3 Reciclado",3)
     fila1();
     fila2();
     console.log(arrRubish)
   
     
     interval = setInterval(updateGame,1000/60);
+     myMusic = new sound ("/Users/andreamrios/Documents/ironHack/week3/day1/Rubishly/Five Little Monkeys Jumping On The Bed  Children Nursery Rhyme  Songs.mp3");
+     myMusic.play();
+     picture = new Picture();
+     picture.draw();
+
   }
      
   
@@ -84,10 +107,11 @@ function startGame(){
     frames++;
     board.draw();
     board1.draw();
-    player1.draw();
+    
     bin1.draw();
     bin2.draw();
     bin3.draw();
+
 
     
     arrRubish.forEach(function(rubish){
@@ -98,13 +122,13 @@ function startGame(){
     });
 
     title.draw();
+    picture.draw();
 
     if (win){
       ctx.fillStyle = "black";
       ctx.font = "50px sarif";
       ctx.fillText("¡Ganaste!", 450, 300)
     }
-  
 
   }
 
@@ -157,7 +181,12 @@ function startGame(){
     
   }
 
-
+  var images = {
+    tod1:"https://yourguthealthcoach.com/wp-content/uploads/2016/12/KidsHealth_Illustration_New_02.png",
+    tod2:"http://i65.tinypic.com/2gy7nrs.jpg"
+  };
+  
+  
 
   startGame();
 
